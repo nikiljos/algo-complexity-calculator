@@ -5,9 +5,10 @@ import styles from "./page.module.css";
 import { vscodeLight } from "@uiw/codemirror-theme-vscode";
 import { cpp } from "@codemirror/lang-cpp";
 import { useQuery } from "@tanstack/react-query";
-import { getComplexityResponse, ComplexityData } from "../utils/openai";
-import ComplexityResponse from "./components/ComplexityResponse";
-import { parseCodeValue } from "../utils/urlparser";
+import { getComplexityResponse } from "../utils/openai.utils";
+import ComplexityResponse from "./ComplexityResponse";
+import { parseCodeValue } from "../utils/urlparser.utils";
+import { ComplexityData } from "../types/common.types";
 
 export default function Analyze() {
   const [codeInput, setCodeInput] = useState("");

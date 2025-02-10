@@ -8,19 +8,6 @@ spaceComplexityExplain
 
 If a valid code is not provided by the user, return {"error":"reason"}`;
 
-type ComplexityAiResponse = {
-  spaceComplexity: string;
-  spaceComplexityCalc: string;
-  spaceComplexityExplain: string;
-  timeComplexity: string;
-  timeComplexityCalc: string;
-  timeComplexityExplain: string;
-  error?: string;
-};
-export type ComplexityData = {
-  content: ComplexityAiResponse;
-};
-
 export const getComplexityResponse = (code: string, token: string) => {
   if (!code) {
     throw new Error("Code not found!");

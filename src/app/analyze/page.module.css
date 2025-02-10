@@ -12,8 +12,8 @@
   justify-items: center;
   min-height: 100svh;
   max-width: 900px;
-  padding: 2px 20px;
-  margin: 20px auto;
+  padding: 0 20px;
+  margin: 0 auto;
   gap: 64px;
   font-family: var(--font-geist-sans);
 }

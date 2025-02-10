@@ -1,6 +1,6 @@
 import Image from "next/image";
-import styles from "../page.module.css";
-import loadingImg from "../../assets/loading.webp";
+import styles from "./page.module.css";
+import loadingImg from "../assets/loading.webp";
 
 export default function ComplexityResponse({
   data,
@@ -16,7 +16,11 @@ export default function ComplexityResponse({
     );
   }
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div>
+        <b>Error:</b> {error.message}
+      </div>
+    );
   }
   if (!data) {
     return <div></div>;
