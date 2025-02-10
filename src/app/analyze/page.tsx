@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import styles from "./page.module.css";
 import { vscodeLight } from "@uiw/codemirror-theme-vscode";
@@ -7,6 +7,7 @@ import { cpp } from "@codemirror/lang-cpp";
 import { useQuery } from "@tanstack/react-query";
 import { getComplexityResponse, ComplexityData } from "../utils/openai";
 import ComplexityResponse from "./components/ComplexityResponse";
+import { parseCodeValue } from "../utils/urlparser";
 
 export default function Analyze() {
   const [codeInput, setCodeInput] = useState("");
@@ -20,8 +21,14 @@ export default function Analyze() {
     retry: false, //this was causing retries and hence delays when i myself was throwing a validation ewrr on the fetch fn
     enabled: false, // disable this query from automatically running
   });
-  console.log({ isPending, isLoading, isFetching, error, data });
-  console.log({ tokenInput, codeInput });
+
+  useEffect(() => {
+    const decodedInput = parseCodeValue(window.location.search);
+    if (decodedInput) {
+      setCodeInput(decodedInput);
+    }
+  }, []);
+
   return (
     <div className={styles.page}>
       <div className={styles.ctaSection}>
