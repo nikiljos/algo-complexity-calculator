@@ -176,3 +176,19 @@
   font-size: 16px;
   color: var(--gray-rgb);
 }
+
+.extraConfig {
+  margin-top: 20px;
+}
+
+.extraConfig summary {
+  width: fit-content;
+  user-select: none;
+}
+.localToggle {
+  padding: 10px 5px;
+}
+
+.localToggle span {
+  font-size: 0.9rem;
+}

@@ -16,17 +16,15 @@ export default function ComplexityResponse({
     );
   }
   if (error) {
+    console.log({ error });
     return (
       <div>
-        <b>Error:</b> {error.message}
+        <b>Error:</b> {error?.message || JSON.stringify(error)}
       </div>
     );
   }
-  if (!data) {
-    return <div></div>;
-  }
-  if (data.content.error) {
-    return <div>{data.content.error}</div>;
+  if (!data || !data.content) {
+    return <div>Unknown error</div>;
   }
   return (
     <div className="responseSection">
