@@ -24,7 +24,7 @@ export default function ComplexityResponse({
     );
   }
   if (!data || !data.content) {
-    return <div>Unknown error</div>;
+    return <div></div>;
   }
   return (
     <div className="responseSection">

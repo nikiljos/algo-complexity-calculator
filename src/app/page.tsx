@@ -28,7 +28,7 @@ export default function Home() {
             Try Now
           </Link>
           <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="https://github.com/nikiljos/algo-complexity-calculator"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.secondary}
