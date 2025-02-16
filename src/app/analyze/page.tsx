@@ -7,9 +7,9 @@ import { cpp } from "@codemirror/lang-cpp";
 import { useQuery } from "@tanstack/react-query";
 import { getComplexityResponse } from "../utils/openai.utils";
 import ComplexityResponse from "./ComplexityResponse";
-import { parseCodeValue } from "../utils/urlparser.utils";
 import { ComplexityData } from "../types/common.types";
 import Switch from "@mui/material/Switch";
+import { useSearchParams } from "next/navigation";
 
 export default function Analyze() {
   const [codeInput, setCodeInput] = useState("");
@@ -25,10 +25,11 @@ export default function Analyze() {
     enabled: false, // disable this query from automatically running
   });
 
+  const searchParams = useSearchParams();
   useEffect(() => {
-    const decodedInput = parseCodeValue(window.location.search);
-    if (decodedInput) {
-      setCodeInput(decodedInput);
+    const codeInput = searchParams.get("code");
+    if (codeInput) {
+      setCodeInput(decodeURIComponent(codeInput.replaceAll("+", " ")));
     }
   }, []);
 
