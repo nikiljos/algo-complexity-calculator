@@ -9,7 +9,6 @@ import { getComplexityResponse } from "../utils/openai.utils";
 import ComplexityResponse from "./ComplexityResponse";
 import { ComplexityData } from "../types/common.types";
 import Switch from "@mui/material/Switch";
-import { useSearchParams } from "next/navigation";
 
 export default function Analyze() {
   const [codeInput, setCodeInput] = useState("");
@@ -25,8 +24,10 @@ export default function Analyze() {
     enabled: false, // disable this query from automatically running
   });
 
-  const searchParams = useSearchParams();
   useEffect(() => {
+    // using URLSearchParams since i dont want to wrap the component in Suspense for useSearchParams to work
+    // Ref: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+    const searchParams = new URLSearchParams(window.location.search);
     const codeInput = searchParams.get("code");
     if (codeInput) {
       setCodeInput(decodeURIComponent(codeInput.replaceAll("+", " ")));
