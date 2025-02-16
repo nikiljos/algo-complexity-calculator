@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import loadingImg from "../assets/loading.webp";
+import ErrorComponent from "../components/ErrorComponent";
 
 export default function ComplexityResponse({
   data,
@@ -17,14 +18,13 @@ export default function ComplexityResponse({
   }
   if (error) {
     console.log({ error });
-    return (
-      <div>
-        <b>Error:</b> {error?.message || JSON.stringify(error)}
-      </div>
-    );
+    return <ErrorComponent errorMsg={error.message || JSON.stringify(error)} />;
   }
   if (!data || !data.content) {
     return <div></div>;
+  }
+  if (data.content?.error) {
+    return <ErrorComponent errorMsg={data.content?.error} />;
   }
   return (
     <div className="responseSection">
