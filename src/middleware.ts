@@ -2,15 +2,18 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
+const SHORT_LIMIT = Number(process.env.RL_SHORT_LIMIT) || 5;
+const LONG_LIMIT = Number(process.env.RL_LONG_LIMIT) || 15;
+
 const shortRatelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(5, "5 m"),
+  limiter: Ratelimit.slidingWindow(SHORT_LIMIT, "5 m"),
   prefix: "ac_short",
 });
 
 const longRateLimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.fixedWindow(15, "6 h"),
+  limiter: Ratelimit.fixedWindow(LONG_LIMIT, "6 h"),
   prefix: "ac_long",
 });
 
